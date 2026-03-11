@@ -3,6 +3,8 @@ import { QRCodeSVG } from 'qrcode.react';
 import Timer from './shared/Timer';
 import Leaderboard from './shared/Leaderboard';
 
+const API_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001';
+
 // Answer tile config — colors + shapes for accessibility
 const TILE_SHAPES  = ['▲', '◆', '●', '■'];
 const TILE_LABELS  = ['Triangle', 'Diamond', 'Circle', 'Square'];
@@ -400,7 +402,7 @@ export default function HostView({ state, actions }) {
 
   // Fetch available quizzes
   useEffect(() => {
-    fetch('/api/quizzes')
+    fetch(`${API_URL}/api/quizzes`)
       .then((r) => r.json())
       .then(setQuizzes)
       .catch(() => setQuizzes([{ id: 'quiz-general', title: 'General Knowledge', questionCount: 10 }]));

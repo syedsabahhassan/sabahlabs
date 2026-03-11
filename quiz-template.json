@@ -1,0 +1,43 @@
+{
+  "title": "My Quiz Title",
+  "description": "A short description of this quiz (optional)",
+  "isPublic": true,
+  "questions": [
+    {
+      "text": "What is the capital of France?",
+      "imageUrl": null,
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "London",  "isCorrect": false },
+        { "text": "Paris",   "isCorrect": true  },
+        { "text": "Berlin",  "isCorrect": false },
+        { "text": "Madrid",  "isCorrect": false }
+      ]
+    },
+    {
+      "text": "Which planet is closest to the Sun?",
+      "imageUrl": null,
+      "timeLimit": 15,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Venus",   "isCorrect": false },
+        { "text": "Earth",   "isCorrect": false },
+        { "text": "Mercury", "isCorrect": true  },
+        { "text": "Mars",    "isCorrect": false }
+      ]
+    },
+    {
+      "text": "How many sides does a hexagon have?",
+      "imageUrl": null,
+      "timeLimit": 10,
+      "pointsBase": 250,
+      "answers": [
+        { "text": "5", "isCorrect": false },
+        { "text": "6", "isCorrect": true  },
+        { "text": "7", "isCorrect": false },
+        { "text": "8", "isCorrect": false }
+      ]
+    }
+  ]
+}

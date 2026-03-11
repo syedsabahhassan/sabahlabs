@@ -3,6 +3,7 @@ import QuizList from './QuizList';
 import QuizEditor from './QuizEditor';
 
 const ADMIN_SECRET = import.meta.env.VITE_ADMIN_SECRET || 'trivia-admin-secret';
+const API_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001';
 
 // ─────────────────────────────────────────────
 // Simple password gate
@@ -65,6 +66,7 @@ export default function AdminPanel({ onBack }) {
   const [quizzes, setQuizzes]     = useState([]);
   const [loading, setLoading]     = useState(false);
   const [toast, setToast]         = useState(null);
+  const [importing, setImporting] = useState(false);
 
   const showToast = (msg, type = 'success') => {
     setToast({ msg, type });
@@ -74,7 +76,7 @@ export default function AdminPanel({ onBack }) {
   const fetchQuizzes = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/quizzes');
+      const res = await fetch(`${API_URL}/api/quizzes`);
       setQuizzes(await res.json());
     } catch (e) {
       showToast('Failed to load quizzes', 'error');
@@ -84,6 +86,73 @@ export default function AdminPanel({ onBack }) {
   };
 
   useEffect(() => { if (authed) fetchQuizzes(); }, [authed]);
+
+  // ── JSON Import ──────────────────────────────────────────────
+  const handleImportJSON = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    e.target.value = '';            // reset so same file can be re-imported
+
+    let data;
+    try {
+      data = JSON.parse(await file.text());
+    } catch {
+      return showToast('Invalid JSON file — could not parse.', 'error');
+    }
+
+    // Basic validation
+    if (!data.title || !Array.isArray(data.questions) || data.questions.length === 0) {
+      return showToast('JSON must have "title" and at least one question.', 'error');
+    }
+    for (let i = 0; i < data.questions.length; i++) {
+      const q = data.questions[i];
+      if (!q.text) return showToast(`Question ${i + 1} is missing "text".`, 'error');
+      if (!Array.isArray(q.answers) || q.answers.length !== 4)
+        return showToast(`Question ${i + 1} must have exactly 4 answers.`, 'error');
+      if (!q.answers.some((a) => a.isCorrect))
+        return showToast(`Question ${i + 1} has no correct answer marked.`, 'error');
+    }
+
+    setImporting(true);
+    try {
+      const headers = { 'Content-Type': 'application/json', 'x-admin-secret': ADMIN_SECRET };
+
+      // 1. Create quiz
+      const qRes = await fetch(`${API_URL}/api/admin/quizzes`, {
+        method: 'POST', headers,
+        body: JSON.stringify({
+          title: data.title,
+          description: data.description || '',
+          isPublic: data.isPublic !== false,
+        }),
+      });
+      const qData = await qRes.json();
+      if (!qRes.ok) throw new Error(qData.error || 'Failed to create quiz');
+
+      // 2. Create questions
+      for (let i = 0; i < data.questions.length; i++) {
+        const q = data.questions[i];
+        await fetch(`${API_URL}/api/admin/quizzes/${qData.id}/questions`, {
+          method: 'POST', headers,
+          body: JSON.stringify({
+            text: q.text,
+            imageUrl: q.imageUrl || null,
+            timeLimit: q.timeLimit || 20,
+            pointsBase: q.pointsBase || 500,
+            orderIndex: i,
+            answers: q.answers,
+          }),
+        });
+      }
+
+      showToast(`✅ "${data.title}" imported (${data.questions.length} questions)!`);
+      fetchQuizzes();
+    } catch (err) {
+      showToast(err.message || 'Import failed', 'error');
+    } finally {
+      setImporting(false);
+    }
+  };
 
   if (!authed) return <AdminLogin onLogin={() => setAuthed(true)} />;
 
@@ -105,11 +174,29 @@ export default function AdminPanel({ onBack }) {
         <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>
           🎛️ Admin Panel
         </div>
-        {view === 'editor' && (
-          <button className="btn btn-secondary btn-sm" style={{ marginLeft: 'auto' }} onClick={() => { setView('list'); setEditing(null); }}>
-            ← Back to Quizzes
-          </button>
-        )}
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {view === 'list' && (
+            <label
+              className="btn btn-secondary btn-sm"
+              style={{ cursor: importing ? 'not-allowed' : 'pointer', opacity: importing ? 0.6 : 1 }}
+              title="Import a quiz from a JSON file"
+            >
+              {importing ? '⏳ Importing…' : '📂 Import JSON'}
+              <input
+                type="file"
+                accept=".json,application/json"
+                style={{ display: 'none' }}
+                onChange={handleImportJSON}
+                disabled={importing}
+              />
+            </label>
+          )}
+          {view === 'editor' && (
+            <button className="btn btn-secondary btn-sm" onClick={() => { setView('list'); setEditing(null); }}>
+              ← Back to Quizzes
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Toast */}
@@ -136,7 +223,7 @@ export default function AdminPanel({ onBack }) {
             onEdit={(quiz) => { setEditing(quiz); setView('editor'); }}
             onDelete={async (id) => {
               if (!window.confirm('Delete this quiz?')) return;
-              await fetch(`/api/admin/quizzes/${id}`, {
+              await fetch(`${API_URL}/api/admin/quizzes/${id}`, {
                 method: 'DELETE',
                 headers: { 'x-admin-secret': ADMIN_SECRET },
               });

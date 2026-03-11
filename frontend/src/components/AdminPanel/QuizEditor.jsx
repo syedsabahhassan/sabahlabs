@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+const API_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001';
+
 const TILE_SHAPES = ['▲', '◆', '●', '■'];
 const TILE_COLORS = ['#e74c3c', '#2980b9', '#e67e22', '#27ae60'];
 
@@ -28,7 +30,7 @@ function QuestionRow({ question, index, onChange, onDelete, onMoveUp, onMoveDown
     try {
       const formData = new FormData();
       formData.append('image', file);
-      const res = await fetch('/api/admin/upload', {
+      const res = await fetch(`${API_URL}/api/admin/upload`, {
         method: 'POST',
         headers: { 'x-admin-secret': adminSecret },
         body: formData,
@@ -237,30 +239,30 @@ export default function QuizEditor({ quiz, adminSecret, onSaved, onCancel }) {
 
       if (isNew) {
         // 1. Create quiz
-        const qRes  = await fetch('/api/admin/quizzes', { method: 'POST', headers, body: JSON.stringify({ title, description, isPublic }) });
+        const qRes  = await fetch(`${API_URL}/api/admin/quizzes`, { method: 'POST', headers, body: JSON.stringify({ title, description, isPublic }) });
         const qData = await qRes.json();
         if (!qRes.ok) throw new Error(qData.error || 'Failed to create quiz');
 
         // 2. Create questions
         for (let i = 0; i < questions.length; i++) {
           const q = questions[i];
-          await fetch(`/api/admin/quizzes/${qData.id}/questions`, {
+          await fetch(`${API_URL}/api/admin/quizzes/${qData.id}/questions`, {
             method: 'POST', headers,
             body: JSON.stringify({ text: q.text, imageUrl: q.imageUrl, timeLimit: q.timeLimit, pointsBase: q.pointsBase, orderIndex: i, answers: q.answers }),
           });
         }
       } else {
         // Update metadata
-        await fetch(`/api/admin/quizzes/${quiz.id}`, { method: 'PUT', headers, body: JSON.stringify({ title, description, isPublic }) });
+        await fetch(`${API_URL}/api/admin/quizzes/${quiz.id}`, { method: 'PUT', headers, body: JSON.stringify({ title, description, isPublic }) });
 
         // For simplicity, delete all questions and re-create them
         // In production you'd diff and patch
         for (const q of (quiz.questions || [])) {
-          if (q.id) await fetch(`/api/admin/questions/${q.id}`, { method: 'DELETE', headers });
+          if (q.id) await fetch(`${API_URL}/api/admin/questions/${q.id}`, { method: 'DELETE', headers });
         }
         for (let i = 0; i < questions.length; i++) {
           const q = questions[i];
-          await fetch(`/api/admin/quizzes/${quiz.id}/questions`, {
+          await fetch(`${API_URL}/api/admin/quizzes/${quiz.id}/questions`, {
             method: 'POST', headers,
             body: JSON.stringify({ text: q.text, imageUrl: q.imageUrl, timeLimit: q.timeLimit, pointsBase: q.pointsBase, orderIndex: i, answers: q.answers }),
           });
