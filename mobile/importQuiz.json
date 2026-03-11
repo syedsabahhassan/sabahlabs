@@ -1,0 +1,139 @@
+{
+  "title": "Curious Facts About Time",
+  "description": "A trivia round exploring fascinating facts about time, calendars, clocks, and how humans measure time around the world.",
+  "isPublic": true,
+  "questions": [
+    {
+      "text": "Which planet in our solar system has the longest day (one full rotation)?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Mars", "isCorrect": false },
+        { "text": "Venus", "isCorrect": true },
+        { "text": "Jupiter", "isCorrect": false },
+        { "text": "Mercury", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "How many time zones does Russia officially span?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "6", "isCorrect": false },
+        { "text": "8", "isCorrect": false },
+        { "text": "11", "isCorrect": true },
+        { "text": "13", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "Which country was the first to officially adopt Daylight Saving Time nationwide?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Germany", "isCorrect": true },
+        { "text": "United States", "isCorrect": false },
+        { "text": "United Kingdom", "isCorrect": false },
+        { "text": "France", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "Which ancient civilization created the first known 365-day calendar?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Romans", "isCorrect": false },
+        { "text": "Mayans", "isCorrect": false },
+        { "text": "Egyptians", "isCorrect": true },
+        { "text": "Greeks", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "Which famous clock tower in London houses the bell known as Big Ben?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Tower Bridge", "isCorrect": false },
+        { "text": "Elizabeth Tower", "isCorrect": true },
+        { "text": "Westminster Clock Tower", "isCorrect": false },
+        { "text": "London Tower", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "What is the term for a year with 366 days?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Solar year", "isCorrect": false },
+        { "text": "Leap year", "isCorrect": true },
+        { "text": "Extended year", "isCorrect": false },
+        { "text": "Extra year", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "Which country experiences the earliest New Year celebration each year due to its time zone?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Japan", "isCorrect": false },
+        { "text": "New Zealand", "isCorrect": false },
+        { "text": "Kiribati", "isCorrect": true },
+        { "text": "Australia", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "How many seconds are there in one hour?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "3,000", "isCorrect": false },
+        { "text": "3,600", "isCorrect": true },
+        { "text": "6,000", "isCorrect": false },
+        { "text": "1,200", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "Which scientist proposed the theory of relativity that changed how we understand time?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Isaac Newton", "isCorrect": false },
+        { "text": "Albert Einstein", "isCorrect": true },
+        { "text": "Galileo Galilei", "isCorrect": false },
+        { "text": "Stephen Hawking", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "Which country introduced the Gregorian calendar in 1582?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Italy", "isCorrect": false },
+        { "text": "Spain", "isCorrect": true },
+        { "text": "France", "isCorrect": false },
+        { "text": "Germany", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "What natural phenomenon originally inspired humans to divide the day into hours?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Phases of the Moon", "isCorrect": false },
+        { "text": "Movement of the Sun across the sky", "isCorrect": true },
+        { "text": "Ocean tides", "isCorrect": false },
+        { "text": "Seasonal winds", "isCorrect": false }
+      ]
+    },
+    {
+      "text": "What is the name of the international reference time standard used worldwide?",
+      "timeLimit": 20,
+      "pointsBase": 500,
+      "answers": [
+        { "text": "Greenwich Time System", "isCorrect": false },
+        { "text": "Coordinated Universal Time (UTC)", "isCorrect": true },
+        { "text": "Global Atomic Time", "isCorrect": false },
+        { "text": "World Clock Standard", "isCorrect": false }
+      ]
+    }
+  ]
+}
