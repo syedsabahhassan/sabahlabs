@@ -25,7 +25,7 @@ export default function LandingPage({ onHostClick, onPlayerClick, onAdminClick, 
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '4rem', marginBottom: '8px' }}>🎮</div>
           <h1 style={{ background: 'linear-gradient(135deg, #a78bfa, #60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: '12px' }}>
-            Sabnaya
+            SabahLabs
           </h1>
           <p style={{ color: 'var(--text-dim)', fontSize: '1.1rem', fontWeight: 600 }}>
             Real-time multiplayer trivia — play with friends!

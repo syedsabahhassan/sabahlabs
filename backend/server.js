@@ -1,7 +1,7 @@
 /**
- * Sabnaya Backend – v2
+ * SabahLabs Backend – v2
  * Express + Socket.IO
- * New in v2: Quiz CRUD API, Team mode, Streaks, Image question support, Supabase persistence
+ * Features: Quiz CRUD API, Team mode, Streaks, Image question support, PostgreSQL persistence
  */
 
 require('dotenv').config();
@@ -19,7 +19,7 @@ const sampleQuizzes = require('./sampleQuiz');
 
 const PORT         = process.env.PORT || 3001;
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
-const ADMIN_SECRET  = process.env.ADMIN_SECRET || 'trivia-admin-secret'; // simple auth
+const ADMIN_SECRET  = process.env.ADMIN_SECRET || 'sabahlabs-admin-secret'; // simple auth
 
 // ─────────────────────────────────────────────
 // Express + Socket.IO Setup
@@ -465,7 +465,7 @@ io.on('connection', (socket) => {
 // ─────────────────────────────────────────────
 initSchema().then(() => {
   httpServer.listen(PORT, () => {
-    console.log(`\n🎮 Sabnaya v2 running on http://localhost:${PORT}`);
+    console.log(`\n🎮 SabahLabs v2 running on http://localhost:${PORT}`);
     console.log(`   CORS: ${CLIENT_ORIGIN}`);
     console.log(`   Admin secret: ${ADMIN_SECRET.substring(0,4)}****`);
   });

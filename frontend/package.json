@@ -1,7 +1,7 @@
 {
-  "name": "sabnaya-frontend",
+  "name": "sabahlabs-frontend",
   "version": "1.0.0",
-  "description": "Sabnaya – Real-time multiplayer trivia frontend",
+  "description": "SabahLabs – Real-time multiplayer trivia frontend",
   "type": "module",
   "scripts": {
     "dev": "vite",

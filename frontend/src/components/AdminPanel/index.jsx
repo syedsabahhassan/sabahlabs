@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import QuizList from './QuizList';
 import QuizEditor from './QuizEditor';
 
-const ADMIN_SECRET = import.meta.env.VITE_ADMIN_SECRET || 'trivia-admin-secret';
+const ADMIN_SECRET = import.meta.env.VITE_ADMIN_SECRET || 'sabahlabs-admin-secret';
 const API_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001';
 
 // ─────────────────────────────────────────────

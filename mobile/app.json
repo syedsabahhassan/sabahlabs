@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Sabnaya",
+    "name": "SabahLabs",
     "slug": "sabnaya",
     "version": "2.0.0",
     "orientation": "portrait",
@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "requireFullScreen": false,
-      "bundleIdentifier": "com.sabnaya.app",
+      "bundleIdentifier": "com.sabahlabs.app",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -24,7 +24,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#0f0f1a"
       },
-      "package": "com.sabnaya.app"
+      "package": "com.sabahlabs.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,6 +33,7 @@
       "eas": {
         "projectId": "aa0fb1e5-e452-49ed-b8d7-cd87fd701b81"
       }
-    }
+    },
+    "owner": "syedsabahhassan"
   }
 }

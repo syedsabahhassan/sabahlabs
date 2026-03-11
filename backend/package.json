@@ -1,7 +1,7 @@
 {
-  "name": "trivia-app-backend",
+  "name": "sabahlabs-backend",
   "version": "2.0.0",
-  "description": "Sabnaya backend — real-time multiplayer trivia with teams, streaks, and persistent quizzes",
+  "description": "SabahLabs backend — real-time multiplayer trivia with teams, streaks, and persistent quizzes",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

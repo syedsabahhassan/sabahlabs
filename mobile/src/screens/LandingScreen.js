@@ -15,7 +15,7 @@ export default function LandingScreen({ navigation }) {
           {/* Logo */}
           <View style={styles.logoSection}>
             <Text style={styles.emoji}>🎮</Text>
-            <Text style={styles.title}>Sabnaya</Text>
+            <Text style={styles.title}>SabahLabs</Text>
             <Text style={styles.subtitle}>Real-time multiplayer trivia</Text>
           </View>
 
